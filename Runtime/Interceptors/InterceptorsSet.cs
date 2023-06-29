@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using Services.Networking.RestClient.Requests;
+using RestClientService.Requests;
 
-namespace Services.Networking.RestClient.Interceptors
+namespace RestClientService.Interceptors
 {
     public class InterceptorsSet : IInterceptor
     {

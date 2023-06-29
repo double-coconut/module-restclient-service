@@ -1,6 +1,6 @@
-using Services.Networking.RestClient.Requests;
+using RestClientService.Requests;
 
-namespace Services.Networking.RestClient.Interceptors
+namespace RestClientService.Interceptors
 {
     public interface IInterceptor
     {

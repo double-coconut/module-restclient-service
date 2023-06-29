@@ -1,6 +1,6 @@
 using System;
 
-namespace Services.Networking.RestClient.Exceptions
+namespace RestClientService.Exceptions
 {
     public class RequestFailedException : Exception
     {

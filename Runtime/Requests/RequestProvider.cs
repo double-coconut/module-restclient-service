@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using BestHTTP;
 
-namespace Services.Networking.RestClient.Requests
+namespace RestClientService.Requests
 {
     public static class RequestProvider
     {

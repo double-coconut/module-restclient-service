@@ -1,4 +1,4 @@
-namespace Services.Networking.RestClient.Requests
+namespace RestClientService.Requests
 {
     public class Response
     {

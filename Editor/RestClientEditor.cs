@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEditor;
 
-namespace Services.Networking.RestClient.Editor
+namespace RestClientService.Editor
 {
     public class RestClientEditor
     {

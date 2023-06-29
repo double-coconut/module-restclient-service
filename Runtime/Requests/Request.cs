@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 using BestHTTP;
 using BestHTTP.Extensions;
 using BestHTTP.Forms;
-using Services.Networking.RestClient.Controllers;
-using Services.Networking.RestClient.Exceptions;
+using RestClientService.Controllers;
+using RestClientService.Exceptions;
+using RestClientService.Utils;
 using Unity.Plastic.Newtonsoft.Json;
-using Utils;
 
-namespace Services.Networking.RestClient.Requests
+namespace RestClientService.Requests
 {
     public class Request : IDisposable
     {

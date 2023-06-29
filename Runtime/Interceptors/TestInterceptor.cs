@@ -1,6 +1,6 @@
-using Services.Networking.RestClient.Requests;
+using RestClientService.Requests;
 
-namespace Services.Networking.RestClient.Interceptors
+namespace RestClientService.Interceptors
 {
     public class TestInterceptor : IInterceptor
     {
@@ -13,7 +13,7 @@ namespace Services.Networking.RestClient.Interceptors
 
         public Request ProcessRequest(Request request)
         {
-            request.AddHeader("Authorization",$"Bearer {_token}");
+            request.AddHeader("Authorization", $"Bearer {_token}");
             return request;
         }
     }
