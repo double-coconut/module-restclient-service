@@ -1,0 +1,7 @@
+{
+  "name": "com.doublecoconut.restclient",
+  "version": "1.0.0",
+  "displayName": "Rest Client Service",
+  "description": "Rest Client Module",
+  "unity": "2020.3"
+}
