@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.Plastic.Newtonsoft.Json;
-using Unity.Plastic.Newtonsoft.Json.Serialization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace RestClientService.Utils
 {
@@ -15,5 +15,6 @@ namespace RestClientService.Utils
             var newProps = props.Where(p => p.Writable && p.Readable).ToList();
             return newProps;
         }
+        
     }
 }

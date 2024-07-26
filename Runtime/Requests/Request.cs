@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 using BestHTTP;
 using BestHTTP.Extensions;
 using BestHTTP.Forms;
+using Newtonsoft.Json;
 using RestClientService.Controllers;
 using RestClientService.Exceptions;
 using RestClientService.Utils;
-using Unity.Plastic.Newtonsoft.Json;
 
 namespace RestClientService.Requests
 {
