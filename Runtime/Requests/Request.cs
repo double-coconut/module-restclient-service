@@ -39,7 +39,7 @@ namespace RestClientService.Requests
             _methodType = methodType;
             Uri uri = new Uri(url);
 #if REST_CLIENT_LOGGING
-            Debug.Log($"<color=yellow>Create {methodType.ToString()} Request</color> to :{url} URL");
+            UnityEngine.Debug.Log($"<color=yellow>Create {methodType.ToString()} Request</color> to :{url} URL");
 #endif
             HttpRequest = new HTTPRequest(uri, methodType);
             HttpRequest.Timeout = TimeSpan.FromSeconds(10);
@@ -80,7 +80,7 @@ namespace RestClientService.Requests
         public Request AddHeader(string name, string value)
         {
 #if REST_CLIENT_LOGGING
-            Debug.Log($"<color=yellow>Add header</color> to :<color=orange>Key: {name}</color>, Value: {value}");
+            UnityEngine.Debug.Log($"<color=yellow>Add header</color> to :<color=orange>Key: {name}</color>, Value: {value}");
 #endif
             HttpRequest.AddHeader(name, value);
             return this;
@@ -105,7 +105,7 @@ namespace RestClientService.Requests
         protected async Task<Response<HTTPResponse>> SendRequest(CancellationToken cancellationToken)
         {
 #if REST_CLIENT_LOGGING
-            Debug.Log(
+            UnityEngine.Debug.Log(
                 $"<color=yellow>Making request</color> to :<color=orange>{Url}</color>, with request method :{HttpRequest.MethodType}");
 #endif
             try
@@ -119,7 +119,7 @@ namespace RestClientService.Requests
                 }
 
 #if REST_CLIENT_LOGGING
-                Debug.Log(
+                UnityEngine.Debug.Log(
                     $"<color=green>Receive response</color> from :<color=orange>{Url}</color>, with request method :{HttpRequest.MethodType} and body :\n{response.DataAsText}");
 #endif
                 return new Response<HTTPResponse>
@@ -136,7 +136,7 @@ namespace RestClientService.Requests
                 {
                     CurrentRetries++;
 #if REST_CLIENT_LOGGING
-                    Debug.LogWarning(
+                    UnityEngine.Debug.LogWarning(
                         $"<color=orange>Retry Request to {Url}, Retries count is :{Retries}, Current Retries :{CurrentRetries}!</color>");
 #endif
                     await Task.Delay(TimeSpan.FromSeconds(RetryDelay), cancellationToken);
@@ -156,7 +156,7 @@ namespace RestClientService.Requests
             finally
             {
 #if REST_CLIENT_LOGGING
-                Debug.Log($"Dispose request to :{Url}");
+                UnityEngine.Debug.Log($"Dispose request to :{Url}");
 #endif
                 Dispose();
             }
@@ -302,9 +302,9 @@ namespace RestClientService.Requests
                 };
                 string json = JsonConvert.SerializeObject(requestBody, settings);
 #if REST_CLIENT_LOGGING
-                Debug.Log($"<color=yellow>Send Request</color> : {json}");
+                UnityEngine.Debug.Log($"<color=yellow>Send Request</color> : {json}");
 #endif
-                byte[] rawData = json.GetASCIIBytes().Data;
+                byte[] rawData = System.Text.Encoding.UTF8.GetBytes(json);
                 HttpRequest.RawData = rawData;
 
                 var result = await SendRequest<TResponse>(cancellationToken);
