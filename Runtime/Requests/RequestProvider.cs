@@ -57,7 +57,12 @@ namespace RestClientService.Requests
             request.TryAddHeaders(headers);
             return request;
         }
-
+        public static Request<TResponse> Put<TResponse>(string url, Dictionary<string, string> headers = null)
+        {
+            var request = new Request<TResponse>(url, HTTPMethods.Put);
+            request.TryAddHeaders(headers);
+            return request;
+        }
         public static Request<TRequest, TResponse> Put<TRequest, TResponse>(string url,
             Dictionary<string, string> headers = null)
         {

@@ -1,6 +1,6 @@
 {
   "name": "com.doublecoconut.restclient",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "displayName": "Rest Client Service",
   "description": "Rest Client Service",
   "unity": "2020.3",
