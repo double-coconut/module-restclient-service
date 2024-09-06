@@ -1,10 +1,11 @@
 {
   "name": "com.doublecoconut.restclient",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "displayName": "Rest Client Service",
   "description": "Rest Client Service",
   "unity": "2020.3",
   "dependencies": {
-    "com.unity.nuget.newtonsoft-json": "3.0.2"
+    "com.unity.nuget.newtonsoft-json": "3.0.2",
+    "com.doublecoconut.dclogger": "1.0.5"
   }
 }

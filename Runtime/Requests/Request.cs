@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using BestHTTP;
 using BestHTTP.Extensions;
 using BestHTTP.Forms;
+using DCLogger.Runtime;
 using Newtonsoft.Json;
 using RestClientService.Controllers;
 using RestClientService.Exceptions;
@@ -39,7 +40,12 @@ namespace RestClientService.Requests
             _methodType = methodType;
             Uri uri = new Uri(url);
 #if REST_CLIENT_LOGGING
+#if DC_LOGGING
+            Logger.Log($"<color=yellow>Create {methodType.ToString()} Request</color> to :{url} URL",
+                RestLogChannels.Default);
+#else
             UnityEngine.Debug.Log($"<color=yellow>Create {methodType.ToString()} Request</color> to :{url} URL");
+#endif
 #endif
             HttpRequest = new HTTPRequest(uri, methodType);
             HttpRequest.Timeout = TimeSpan.FromSeconds(10);
@@ -80,7 +86,12 @@ namespace RestClientService.Requests
         public Request AddHeader(string name, string value)
         {
 #if REST_CLIENT_LOGGING
+#if DC_LOGGING
+            Logger.Log($"<color=yellow>Add header</color> to :<color=orange>Key: {name}</color>, Value: {value}",
+                RestLogChannels.Default);
+#else
             UnityEngine.Debug.Log($"<color=yellow>Add header</color> to :<color=orange>Key: {name}</color>, Value: {value}");
+#endif
 #endif
             HttpRequest.AddHeader(name, value);
             return this;
@@ -105,8 +116,14 @@ namespace RestClientService.Requests
         protected async Task<Response<HTTPResponse>> SendRequest(CancellationToken cancellationToken)
         {
 #if REST_CLIENT_LOGGING
+#if DC_LOGGING
+            Logger.Log(
+                $"<color=yellow>Making request</color> to :<color=orange>{Url}</color>, with request method :{HttpRequest.MethodType}",
+                RestLogChannels.Request);
+#else
             UnityEngine.Debug.Log(
                 $"<color=yellow>Making request</color> to :<color=orange>{Url}</color>, with request method :{HttpRequest.MethodType}");
+#endif
 #endif
             try
             {
@@ -119,8 +136,14 @@ namespace RestClientService.Requests
                 }
 
 #if REST_CLIENT_LOGGING
+#if DC_LOGGING
+                Logger.Log(
+                    $"<color=green>Receive response</color> from :<color=orange>{Url}</color>, with request method :{HttpRequest.MethodType} and body :\n{response.DataAsText}",
+                    RestLogChannels.Response);
+#else
                 UnityEngine.Debug.Log(
                     $"<color=green>Receive response</color> from :<color=orange>{Url}</color>, with request method :{HttpRequest.MethodType} and body :\n{response.DataAsText}");
+#endif
 #endif
                 return new Response<HTTPResponse>
                 {
@@ -136,8 +159,14 @@ namespace RestClientService.Requests
                 {
                     CurrentRetries++;
 #if REST_CLIENT_LOGGING
+#if DC_LOGGING
+                    Logger.LogWarning(
+                        $"<color=orange>Retry Request to {Url}, Retries count is :{Retries}, Current Retries :{CurrentRetries}!</color>",
+                        RestLogChannels.Default);
+#else
                     UnityEngine.Debug.LogWarning(
                         $"<color=orange>Retry Request to {Url}, Retries count is :{Retries}, Current Retries :{CurrentRetries}!</color>");
+#endif
 #endif
                     await Task.Delay(TimeSpan.FromSeconds(RetryDelay), cancellationToken);
                     HttpRequest = CopyHttpRequest(true);
@@ -156,7 +185,11 @@ namespace RestClientService.Requests
             finally
             {
 #if REST_CLIENT_LOGGING
+#if DC_LOGGING
+                Logger.Log($"Dispose request to :{Url}", RestLogChannels.Default);
+#else
                 UnityEngine.Debug.Log($"Dispose request to :{Url}");
+#endif
 #endif
                 Dispose();
             }
@@ -302,7 +335,11 @@ namespace RestClientService.Requests
                 };
                 string json = JsonConvert.SerializeObject(requestBody, settings);
 #if REST_CLIENT_LOGGING
+#if DC_LOGGING
+                Logger.Log($"<color=yellow>Send Request</color> : {json}", RestLogChannels.Request);
+#else
                 UnityEngine.Debug.Log($"<color=yellow>Send Request</color> : {json}");
+#endif
 #endif
                 byte[] rawData = System.Text.Encoding.UTF8.GetBytes(json);
                 HttpRequest.RawData = rawData;

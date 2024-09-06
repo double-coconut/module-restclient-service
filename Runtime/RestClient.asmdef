@@ -2,7 +2,8 @@
     "name": "RestClient",
     "rootNamespace": "",
     "references": [
-        "BestHTTP"
+        "BestHTTP",
+        "DCLogger.Runtime"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
