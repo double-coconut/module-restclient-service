@@ -70,6 +70,20 @@ namespace RestClientService.Requests
             request.TryAddHeaders(headers);
             return request;
         }
+        public static Request Delete(string url, Dictionary<string, string> headers = null)
+        {
+            var request = new Request(url, HTTPMethods.Delete);
+            request.TryAddHeaders(headers);
+            return request;
+        }
+
+        public static Request<TResponse> Delete<TResponse>(string url, Dictionary<string, string> headers = null)
+        {
+            var request = new Request<TResponse>(url, HTTPMethods.Delete);
+            request.TryAddHeaders(headers);
+            return request;
+        }
+
 
         private static bool TryAddHeaders(this Request request, Dictionary<string, string> headers)
         {
