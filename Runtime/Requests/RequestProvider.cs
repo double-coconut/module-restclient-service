@@ -84,7 +84,12 @@ namespace RestClientService.Requests
             return request;
         }
 
-
+        public static Request<TRequest,TResponse> Delete<TRequest,TResponse>(string url, Dictionary<string, string> headers = null)
+        {
+            var request = new Request<TRequest,TResponse>(url, HTTPMethods.Delete);
+            request.TryAddHeaders(headers);
+            return request;
+        }
         private static bool TryAddHeaders(this Request request, Dictionary<string, string> headers)
         {
             if (headers == null || headers.Count == 0)
